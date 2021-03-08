@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { setAuthHeader } from '../helper.js';
 import { SpotifyContext } from './Context';
+import { useHistory } from 'react-router-dom';
 import noImg from '../images/img_not_found.jpg';
 import axios from 'axios';
 
@@ -8,6 +9,7 @@ const Albums = () => {
   const { artist_ID, albums } = SpotifyContext();
   const [albumResults, setAlbumResults] = albums;
   const [artistID] = artist_ID;
+  const history = useHistory();
 
   useEffect(() => {
     if (artistID) {
@@ -17,6 +19,14 @@ const Albums = () => {
   }, [artistID])
 
   async function findAlbums(id) {
+    // Check if token is expired, if so redirect to Login page
+    const currentTime = new Date().getTime();
+    const expiryTime = JSON.parse(localStorage.getItem('expiry_time'));
+    if (expiryTime) {
+      if (currentTime > expiryTime) {
+        history.push('/');
+      }
+    }
     setAuthHeader();
     await axios.get(`https://api.spotify.com/v1/artists/${id}/albums`)
     .then(response => {

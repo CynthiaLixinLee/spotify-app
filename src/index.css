@@ -123,10 +123,13 @@ input {
   border: 1px solid #b0b0b0;
   margin: 2vw;
   height: auto;
-  cursor: pointer;
+  /* cursor: pointer; */
   align-content: baseline;
 }
-.searchContainer .item:hover {
+.searchContainer .resultContainer .item {
+  cursor: pointer;
+}
+.searchContainer .resultContainer .item:hover {
   border: 1px solid #686767;
   transition: all ease-in-out 0.3s;
 }
@@ -283,6 +286,12 @@ input {
   }
 }
 @media only screen and (max-width: 450px) {
+  .search {
+    width: 50vw;
+  }
+  .searchArtist {
+    width: 80vw;
+  }
   .item .boxTitle {
     font-size: 1rem;
   }

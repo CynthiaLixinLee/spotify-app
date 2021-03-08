@@ -8,6 +8,7 @@ import ArtistSearch from "./ArtistSearch";
 import Albums from "./Albums";
 
 const App = () => {
+
   return(
     <ResultProvider>
       <div className="App">

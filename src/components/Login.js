@@ -1,4 +1,5 @@
 import React from 'react';
+// import { SpotifyContext } from './Context';
 import logo from '../images/logo_spotify.png';
 
 const Login = () => {
