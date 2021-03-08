@@ -5,10 +5,9 @@ import axios from 'axios';
 import { SpotifyContext } from './Context';
 
 const SearchBar = () => {
-  const {input, artists, display} = SpotifyContext();
+  const {input, artists} = SpotifyContext();
   const [inputValue, setInputValue] = input;
   const [artistResults, setArtistResults] = artists;
-  const [resultDisplay, setResultDisplay] = display;
   const searchBar = document.querySelector('.searchArtist');
 
   const checkKey = (event) => {
@@ -25,7 +24,7 @@ const SearchBar = () => {
   // Triggered when state is updated
   useEffect(() => {
     searching(inputValue);
-    setResultDisplay('artists');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue])
 
   async function searching(inputValue) {
@@ -38,15 +37,15 @@ const SearchBar = () => {
         : [];
     })
     .catch(err => {
-      // TODO: Do something to show this
       throw console.log('No results found');
     });
   }
 
   return (
     <div className="search searchArtist">
+      <span className="left"></span>
       <input type="text" onKeyDown={checkKey} onChange={findArtist} placeholder="Search for an artist..." />
-      <img src={search} className="icon" />
+      <img src={search} className="icon" alt="search icon" />
     </div>
   );
 };

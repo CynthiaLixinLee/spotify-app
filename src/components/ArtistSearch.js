@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Artists from './Artists.js';
-import SearchBar from './SearchBar.js';
+import React from "react";
+import Artists from './Artists';
+import SearchBar from './SearchBar';
 
 const ArtistSearch = () => {
 
   return (
-    <div>
+    <div className="searchContainer">
         <SearchBar />
         <Artists />
-        {/* {
-        resultDisplay === 'artists'
-        ? <Artists />
-        : <Albums />
-        } */}
     </div>
   )
 };

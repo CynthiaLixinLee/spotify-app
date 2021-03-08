@@ -7,7 +7,7 @@ const Redirect = () => {
   useEffect(() => {
     const url = window.location.href;
     if (url.indexOf('access_denied') > -1) {
-      console.log("ACCESS DENIED");
+      history.push('/');
     } else {
       const accessToken = getValues(url);
       const expiryTime = new Date().getTime() + accessToken.expires_in *1000;
@@ -18,7 +18,7 @@ const Redirect = () => {
   },[])
 
   return (
-   <div></div>
+   <div />
   )
 };
 

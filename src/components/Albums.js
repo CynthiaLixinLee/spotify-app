@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { setAuthHeader } from "../helper.js";
-import { SpotifyContext } from './Context.js';
+import React, { useEffect } from 'react';
+import { setAuthHeader } from '../helper.js';
+import { SpotifyContext } from './Context';
 import noImg from '../images/img_not_found.jpg';
 import axios from 'axios';
 
@@ -13,6 +13,7 @@ const Albums = () => {
     if (artistID) {
       findAlbums(artistID[0]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artistID])
 
   async function findAlbums(id) {
@@ -24,14 +25,17 @@ const Albums = () => {
       : [];
     })
     .catch(err => {
-      // TODO: Do something to show this
       throw console.log('No albums found');
     });
   }
   const list = Array.from(albumResults);
 
+
   const albumList = list.map(function(album){
-      return <div key={album.id} data-key={album.id} className="item">
+      return <div
+      key={album.id}
+      data-key={album.id}
+      className="item">
         <img src={album.images[0] ? album.images[0].url : {noImg}} alt="Album cover" />
         <h3 className="boxTitle">{album.name}</h3>
         <span className="artists">
@@ -39,15 +43,15 @@ const Albums = () => {
         </span>
         <span className="releaseDate">{album.release_date}</span>
         <span className="tracks">{album.total_tracks} tracks</span>
-        <a href={album.external_urls.spotify} target="_blank">Preview on Spotify</a>
+        <a href={album.external_urls.spotify} target="_blank" rel="noreferrer">Preview on Spotify</a>
       </div>
   })
 
   return (
-    <div className="resultContainer">
+    <div>
       <h2 className="artistName">{artistID[1]}</h2>
-      <p>Albums</p>
-      { albumList }
+      <p className="album">Albums</p>
+      <div className="resultContainer">{ albumList }</div>
     </div>
   )
 };

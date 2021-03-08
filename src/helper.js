@@ -2,7 +2,6 @@ import axios from 'axios';
 
 // Get access token and expiry time
 export const getValues = (url) => {
-  console.log(url);
   let str = "http://localhost:3000/redirect#";
   return url
     .replace(str, '')

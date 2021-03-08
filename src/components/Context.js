@@ -11,11 +11,15 @@ function ResultProvider({ children }) {
   const [artistResults, setArtistResults] = useState('')
   const [albumResults, setAlbumResults] = useState('')
   const [artistID, setArtistID] = useState([])
-  const [resultDisplay, setResultDisplay] = useState('artists')
 
   return (
     <ResultContext.Provider
-      value={{ input: [inputValue, setInputValue], artists: [artistResults, setArtistResults], albums: [albumResults, setAlbumResults], display: [resultDisplay, setResultDisplay], artist_ID: [artistID, setArtistID] }}
+      value={{
+        input: [inputValue, setInputValue],
+        artists: [artistResults, setArtistResults],
+        albums: [albumResults, setAlbumResults],
+        artist_ID: [artistID, setArtistID]
+      }}
     >
       { children }
     </ResultContext.Provider>
