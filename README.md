@@ -6,12 +6,13 @@ The application was built using React. I utilised [Create React App](https://git
 
 There are two ways to view this app:
 
-Option 1: View online
-------- 
+## Option 1: View online
+
 The project is hosted online [here](https://spotify-app-cynthia.netlify.app/).
 
-Option 2: Manual build
-------- 
+## Option 2: Manual build
+
 1. Clone repo
 2. Run "yarn start" or "npm start"
-3. Open http://localhost:3000/
+3. Update the redirect url in 'env'
+4. Open http://localhost:3000/

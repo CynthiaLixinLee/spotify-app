@@ -15,7 +15,7 @@ const App = () => {
         <Header />
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/redirect" component={Redirect} />
+            <Route path="/redirect" component={Redirect} />
             <Route exact path="/artist-search" component={ArtistSearch} />
             <Route exact path="/albums" component={Albums} />
           </Switch>
