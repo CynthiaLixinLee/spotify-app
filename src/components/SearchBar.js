@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { setAuthHeader } from '../helper';
 import search from '../images/icon_search.png';
 import axios from 'axios';
-import { SpotifyContext } from './Context.js';;
+import { SpotifyContext } from './Context';
 
 const SearchBar = () => {
-  const {input, artists} = SpotifyContext();
+  const {input, artists, display} = SpotifyContext();
   const [inputValue, setInputValue] = input;
   const [artistResults, setArtistResults] = artists;
+  const [resultDisplay, setResultDisplay] = display;
+  const searchBar = document.querySelector('.searchArtist');
 
   const checkKey = (event) => {
     if (event.keyCode === 13) {
@@ -23,13 +25,14 @@ const SearchBar = () => {
   // Triggered when state is updated
   useEffect(() => {
     searching(inputValue);
+    setResultDisplay('artists');
   }, [inputValue])
 
   async function searching(inputValue) {
     setAuthHeader();
-    //TODO:  check if token expired, if so ask for new token
     await axios.get(`https://api.spotify.com/v1/search?q=${inputValue}&type=artist`)
     .then(response => {
+      searchBar.classList.add('slideUp');
       return response.data.artists ?
         setArtistResults(response.data.artists.items)
         : [];
@@ -42,8 +45,7 @@ const SearchBar = () => {
 
   return (
     <div className="search searchArtist">
-      {/* onChange={findArtist} */}
-      <input type="text" onKeyDown={checkKey} placeholder="Search for an artist..." />
+      <input type="text" onKeyDown={checkKey} onChange={findArtist} placeholder="Search for an artist..." />
       <img src={search} className="icon" />
     </div>
   );

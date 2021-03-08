@@ -24,7 +24,8 @@ code {
   width: 100vw;
 }
 
-.App {
+.App,
+.searchContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +37,7 @@ code {
   padding: 1.5vw 3vw;
   border: 1px solid #b0b0b0;
   border-radius: 10px;
-  min-width: 50vw;
+  width: 50vw;
   margin-top: 40vh;
 }
 .search:hover,
@@ -68,6 +69,10 @@ img.icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.searchArtist.slideUp {
+  margin-top: 10vh;
+  transition: margin-top 1s ease-in-out;
 }
 .searchArtist:hover {
   cursor: text;
@@ -108,25 +113,38 @@ input {
   width: 20vw;
   border: 1px solid #b0b0b0;
   margin: 2vw;
-  padding: 0.5vw;
+  height: 30vw;
+  flex-flow: wrap;
+  cursor: pointer;
 }
 .item img {
-  max-height: 15vw;
-  background-size: contain;
+  height: 15vw;
+  background-size: cover;
+  background-color: #f1f1f1;
+  width: 100%;
 }
+.item .boxTitle,
+.item .followers,
+.item .artists,
+.item .releaseDate,
+.item .tracks {
+  margin: 0;
+  padding: 0.1vw 0.7vw;
+  width: 100%;
+}
+
 .item .starRating {
-  /* font: 0; */
-  max-width: 10vw;
+  width: 12vw;
   color: gold;
   z-index: 2;
   height: 2vw;
-  padding-top: 1vh;
   font-size: 1.5rem;
+  padding: 0.7vh 0.7vw 2vh 0.7vw;
 }
 .item .starRating::before {
   content: "";
   content: "★★★★★";
-  color: rgba(236, 232, 232, 0.924);
+  color: #f1f1f1;
   position: absolute;
   z-index: -1;
 }
@@ -135,10 +153,34 @@ input {
   width: 100%;
   height: 100%;
 }
-.item .albumLink {
-  width: 20vw;
-  height: 25vw;
-  position: absolute;
-  z-index: 5;
+
+.item a {
+  background: #f1f1f1;
+  text-decoration: none;
+  color: #767676;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #b0b0b0;
 }
+
 /* Media queries for results item width */
+@media only screen and (max-width: 780px) {
+  .item {
+    width: 27vw;
+    height: 33vw;
+  }
+  .item img {
+    height: 18vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .item {
+    width: 38vw;
+    height: 50vw;
+  }
+  .item img {
+    height: 25vw;
+  }
+  /* Need to change font sizes too */
+}

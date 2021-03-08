@@ -20,7 +20,6 @@ const Login = () => {
         <img src={logo} alt="Logo" class="icon" />
       </button>
     </div>
-
   )
 }
 

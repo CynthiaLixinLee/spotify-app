@@ -7,13 +7,15 @@ function SpotifyContext() {
 }
 
 function ResultProvider({ children }) {
-  const [loggedIn, setLogin] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [artistResults, setArtistResults] = useState('')
+  const [albumResults, setAlbumResults] = useState('')
+  const [artistID, setArtistID] = useState([])
+  const [resultDisplay, setResultDisplay] = useState('artists')
 
   return (
     <ResultContext.Provider
-      value={{ login: [loggedIn, setLogin], input: [inputValue, setInputValue], artists: [artistResults, setArtistResults] }}
+      value={{ input: [inputValue, setInputValue], artists: [artistResults, setArtistResults], albums: [albumResults, setAlbumResults], display: [resultDisplay, setResultDisplay], artist_ID: [artistID, setArtistID] }}
     >
       { children }
     </ResultContext.Provider>

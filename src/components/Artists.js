@@ -1,31 +1,38 @@
 import React from "react";
 import { formatFollowers, starConversion } from "../helper.js";
+import { useHistory } from 'react-router-dom';
 import { SpotifyContext } from './Context.js';
+import noImg from '../images/img_not_found.jpg';
 
 const Artists = () => {
-  const { artists } = SpotifyContext();
+  const history = useHistory();
+  const { artists, artist_ID, display } = SpotifyContext();
   const [artistResults] = artists;
+  // const [resultDisplay, setResultDisplay] = display;
+  const [artistID, setArtistID] = artist_ID;
   const list = Array.from(artistResults);
- console.log(list);
 
  const goToAlbums = (e) => {
-  console.log('going to album');
-  // change state, change fragments in Results
-  // run api call to get albums
+   let newID = e.currentTarget.getAttribute('data-key');
+   let newName = e.currentTarget.getAttribute('data-name');
+   setArtistID([newID].concat(newName));
+   history.push('/albums');
+  //  setResultDisplay('albums');
 }
+
+  const artistList = list.map(function(artist){
+    return <div key={artist.id} data-key={artist.id} data-name={artist.name} className="item" onClick={goToAlbums}>
+      <img src={artist.images[0] ? artist.images[0].url : noImg} alt="Artist" />
+      <h3 className="boxTitle">{artist.name}</h3>
+      <span className="followers">{formatFollowers(artist.followers.total)}  followers</span>
+      <span className="starRating">{starConversion(artist.popularity)}
+      </span>
+    </div>
+  })
 
   return (
     <div className="resultContainer">
-      { list.map(function(artist){
-        return <div key={artist.id} className="item">
-          {/* <img src={artist.images[0].url} /> */}
-          <h3 className="boxTitle">{artist.name}</h3>
-          <span className="followers">{formatFollowers(artist.followers.total)}  followers</span>
-          <span className="starRating">{starConversion(artist.popularity)}
-          </span>
-          <span className="albumLink" onCLick={goToAlbums}></span>
-        </div>
-        })}
+      { artistList }
     </div>
   )
 };
