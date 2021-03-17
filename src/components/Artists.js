@@ -12,10 +12,8 @@ const Artists = () => {
   const [artistID, setArtistID] = artist_ID;
   const list = Array.from(artistResults);
 
- const goToAlbums = (e) => {
-   let newID = e.currentTarget.getAttribute('data-key');
-   let newName = e.currentTarget.getAttribute('data-name');
-   setArtistID([newID].concat(newName));
+ const goToAlbums = (id, name)  => {
+   setArtistID([id].concat(name));
    setAlbumResults('');
    history.push('/albums');
 }
@@ -23,10 +21,8 @@ const Artists = () => {
   const artistList = list.map(function(artist){
     return <div
       key={artist.id}
-      data-key={artist.id}
-      data-name={artist.name}
       className="item"
-      onClick={goToAlbums}>
+      onClick={() => goToAlbums(artist.id, artist.name)}>
       <img src={artist.images[0] ? artist.images[0].url : noImg} alt="Artist" />
       <h3 className="boxTitle">{artist.name}</h3>
       <span className="followers">{formatFollowers(artist.followers.total)}  followers</span>

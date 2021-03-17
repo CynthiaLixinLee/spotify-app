@@ -25,6 +25,7 @@ const SearchBar = () => {
 
   // Triggered when state is updated
   useEffect(() => {
+    if (!inputValue) return setArtistResults([]);
     searching(inputValue);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue])
